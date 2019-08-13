@@ -1,0 +1,19 @@
+.Sidebar__folderlist {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.folderlist {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.btn__addfolder {
+    margin: 20px;
+    padding: 15px 30px;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+}

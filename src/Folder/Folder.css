@@ -1,0 +1,21 @@
+.folder {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    text-align: center;
+    padding: 20px;
+}
+
+.folder__name {
+    font-weight: normal;
+    padding: 0px;
+    margin: 0px;
+}
+
+.active li {
+    background-color: aquamarine;
+}
+
+a:first-child > li {
+    border-top: 1px solid black;
+}

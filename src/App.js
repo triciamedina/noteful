@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom';
 import './App.css';
-import MainSidebar from './MainSidebar/MainSidebar';
-import MainPage from './MainPage/MainPage'
-import NoteSidebar from './NoteSidebar/NoteSidebar';
-import NotePage from './NotePage/NotePage'
+import Sidebar from './Sidebar/Sidebar';
+import Main from './Main/Main'
 import STORE from './dummy-store';
-
 
 class App extends Component {
   constructor(props) {
@@ -23,32 +20,28 @@ class App extends Component {
           <Link to='/'><h1>Noteful</h1></Link>
         </header>
         <main>
-          <aside>
-            <Route exact path='/' render={() =>
-              <MainSidebar folders={this.state.folders}/>
-            } />
-            <Route path='/folder/:folderId' render={() => 
-              <MainSidebar folders={this.state.folders}/>
-            } />
-            <Route path='/note/:noteId' render={(routerProps) =>
-              <NoteSidebar 
-                note={this.state.notes.filter(note => note.id === routerProps.match.params.noteId)} 
-                folders={this.state.folders}
-                onClickBack={() => routerProps.history.goBack()}
-              />
-            }/>
-          </aside>
-          <section>
-            <Route exact path='/' render={() =>
-              <MainPage notes={this.state.notes} />
-            } />
-            <Route path='/folder/:folderId' render={(routerProps) =>
-              <MainPage notes={this.state.notes.filter(note => note.folderId === routerProps.match.params.folderId)} />
-            } />
-            <Route path='/note/:noteId' render={(routerProps) =>
-              <NotePage note={this.state.notes.filter(note => note.id === routerProps.match.params.noteId)} />
-            } />
-          </section>
+          <Route exact path='/' render={() =>
+            <Sidebar folders={this.state.folders}/>
+          }/>
+          <Route path='/folder/:folderId' render={() => 
+            <Sidebar folders={this.state.folders}/>
+          }/>
+          <Route path='/note/:noteId' render={(routerProps) => {
+            return <Sidebar 
+              note={this.state.notes.filter(note => note.id === routerProps.match.params.noteId)} 
+              folders={this.state.folders}
+              onClickBack={() => routerProps.history.goBack()}
+            />}
+          }/>
+          <Route exact path='/' render={() =>
+            <Main notes={this.state.notes} />
+          }/>
+          <Route path='/folder/:folderId' render={(routerProps) =>
+            <Main notes={this.state.notes.filter(note => note.folderId === routerProps.match.params.folderId)} />
+          }/>
+          <Route path='/note/:noteId' render={(routerProps) =>
+            <Main note={this.state.notes.filter(note => note.id === routerProps.match.params.noteId)} />
+          } />
         </main>
       </div>
     );
