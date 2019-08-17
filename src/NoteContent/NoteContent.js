@@ -7,11 +7,6 @@ class NoteContent extends Component {
         const {note} = this.props;
         return (
             <div>
-                <ul className="NoteList">
-                    {this.props.note.map(note => 
-                        <Note key={note.id} note={note} />
-                    )}
-                </ul>
                 <p className="Note__content">{note[0].content}</p>
             </div>
             
