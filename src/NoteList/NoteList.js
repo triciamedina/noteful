@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import './NoteList.css';
-import Note from '../Note/Note'
+import Note from '../Note/Note';
 
 class NoteList extends Component {
+    //read context
+    //read router props
+    // filter notes in context based on router props (either folder id or note id)
+
     render() {
         return (
             <div className="NoteList__container">
@@ -17,7 +21,7 @@ class NoteList extends Component {
                 {this.props.note && (
                     <div>
                         <ul className="NoteList">
-                            {this.props.note.map(note => <Note key={note.id} note={note} />)}
+                            {this.props.note.map(note => <Note key={note.id} note={note} onDelete={this.props.onDelete}/>)}
                         </ul>
                     </div>
                 )}

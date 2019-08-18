@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import './FolderList.css';
-import Folder from '../Folder/Folder'
+import './FolderSidebar.css';
+import Folder from '../Folder/Folder';
+import NotefulContext from '../NotefulContext';
 
-class FolderList extends Component {
+class FolderSidebar extends Component {
+    static contextType = NotefulContext;
     render() {
+        const {folders} = this.context;
         return (
             <div className="Sidebar__folderlist">
                 <ul className="folderlist">
-                    {this.props.folders.map(folder => 
+                    {folders.map(folder => 
                         <Folder key={folder.id} folder={folder}/>
                     )}
                 </ul>
@@ -17,4 +20,4 @@ class FolderList extends Component {
     }
 }
 
-export default FolderList;
+export default FolderSidebar;

@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import './FolderDetail.css';
+import './NoteSidebar.css';
+import NotefulContext from '../NotefulContext';
 
-class FolderDetail extends Component {
+class NoteSidebar extends Component {
+    static contextType = NotefulContext;
     render() {
-        const folder = this.props.folders.filter(folder => folder.id === this.props.note[0].folderId)
+        const folder = this.context.folders.filter(folder => folder.id === this.props.note[0].folderId)
         return (
             <div className="Sidebar__folderdetail">
                 <button className="btn__back" onClick={this.props.onClickBack}>Go back</button>
@@ -13,4 +15,4 @@ class FolderDetail extends Component {
     }
 }
 
-export default FolderDetail
+export default NoteSidebar

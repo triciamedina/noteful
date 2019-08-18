@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 import './MainPage.css';
 import FolderList from '../FolderList/FolderList';
-import NoteList from '../NoteList/NoteList'
+import NoteList from '../NoteList/NoteList';
+import NotefulContext from '../NotefulContext';
 
 class MainPage extends Component {
+    static contextType = NotefulContext;
     render() {
+        const {notes} = this.context;
         return (
             <main>
                 <aside>
-                    <FolderList folders={this.props.folders}/>
+                    <FolderList />
                 </aside>
                 <section>
-                    <NoteList notes={this.props.notes} />
+                    <NoteList notes={notes}/>
                 </section>
             </main>
         )
