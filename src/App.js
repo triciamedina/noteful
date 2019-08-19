@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom';
 import './App.css';
-import MainPage from './MainPage/MainPage'
-import FolderPage from './FolderPage/FolderPage';
-import NotePage from './NotePage/NotePage';
+// import MainPage from './MainPage/MainPage'
+// import FolderPage from './FolderPage/FolderPage';
+// import NotePage from './NotePage/NotePage';
 import NotefulContext from './NotefulContext';
+import FolderSidebar from './FolderSidebar/FolderSidebar';
+import NoteList from './NoteList/NoteList';
+import NoteSidebar from './NoteSidebar/NoteSidebar';
+import NoteContent from './NoteContent/NoteContent';
 
 class App extends Component {
   constructor(props) {
@@ -69,19 +73,30 @@ class App extends Component {
         <header>
           <Link to='/'><h1>Noteful</h1></Link>
         </header>
+        <main>
           <NotefulContext.Provider value={contextValue}>
-            <Route exact path='/' component={MainPage} />
-            <Route path='/folder/:folderId' render={(routerProps) => 
-              <FolderPage folderId={routerProps.match.params.folderId}/>
-            }/>
-            <Route path='/note/:noteId' render={(routerProps) =>
+            <aside>
+              <Route exact path='/' component={FolderSidebar} />
+              <Route path='/folder/:folderId' component={FolderSidebar} />
+              <Route path='/note/:noteId' component={NoteSidebar} />
+            </aside>
+            <section>
+              <Route exact path='/' component={NoteList} />
+              <Route path='/folder/:folderId' component={NoteList} />
+              <Route path='/note/:noteId' component={NoteList} />
+              <Route path='/note/:noteId' component={NoteContent} />
+            </section>
+
+            {/* <Route path='/note/:noteId' render={(routerProps) =>
               <NotePage
                 noteId={routerProps.match.params.noteId} 
                 onClickBack={() => routerProps.history.goBack()}
                 onDelete={() => routerProps.history.push('/')}
               />}
-            />
+            /> */}
           </NotefulContext.Provider>
+        </main>
+          
       </div>
     );
   }

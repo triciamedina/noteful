@@ -1,33 +1,43 @@
 import React, {Component} from 'react';
 import './NoteList.css';
 import Note from '../Note/Note';
+import NotefulContext from '../NotefulContext';
 
 class NoteList extends Component {
-    //read context
-    //read router props
-    // filter notes in context based on router props (either folder id or note id)
-
+    static contextType = NotefulContext;
+    onDelete = () => {
+        this.props.history.push('/');
+    }
     render() {
+        const {notes} = this.context;
+        const folderPath = this.props.match.params.folderId ? true : false;
+        const notePath = this.props.match.params.noteId ? true : false;
+
+        const allNotes = notes.map(note => <Note key={note.id} note={note} />)
+
+        const folderNotes = folderPath ? 
+            notes
+                .filter(note => note.folderId === this.props.match.params.folderId)
+                .map(note => <Note key={note.id} note={note} />) 
+                : null;
+
+        const singleNote = notePath ? 
+            notes
+                .filter(note => note.id === this.props.match.params.noteId)
+                .map(note => <Note key={note.id} note={note} onDelete={this.onDelete}/>)
+            : null;
+
         return (
             <div className="NoteList__container">
-                {this.props.notes && (
-                    <div>
-                        <ul className="NoteList">
-                            {this.props.notes.map(note => <Note key={note.id} note={note} />)}
-                        </ul>
-                        <button className="btn__addnote">Add note</button>
-                    </div>
-                )}
-                {this.props.note && (
-                    <div>
-                        <ul className="NoteList">
-                            {this.props.note.map(note => <Note key={note.id} note={note} onDelete={this.props.onDelete}/>)}
-                        </ul>
-                    </div>
-                )}
+                <div>
+                    <ul className="NoteList">
+                        {(folderNotes || singleNote) || allNotes}
+                        {!notePath && <button className="btn__addnote">Add note</button>}
+                    </ul>
+                </div>
             </div>
         )
     }
 }
 
-export default NoteList
+export default NoteList;
