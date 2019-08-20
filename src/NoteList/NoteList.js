@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './NoteList.css';
 import Note from '../Note/Note';
 import NotefulContext from '../NotefulContext';
@@ -29,12 +30,14 @@ class NoteList extends Component {
 
         return (
             <div className="NoteList__container">
-                <div>
-                    <ul className="NoteList">
-                        {(folderNotes || singleNote) || allNotes}
-                        {!notePath && <button className="btn__addnote">Add note</button>}
-                    </ul>
-                </div>
+                <ul className="NoteList">
+                    {(folderNotes || singleNote) || allNotes}
+                    {!notePath && 
+                        <Link to={'/add-note'} className='link__addnote'>
+                            <button className="btn__addnote">Add note</button>
+                        </Link>
+                    }
+                </ul>
             </div>
         )
     }

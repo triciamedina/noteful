@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom';
 import './App.css';
-// import MainPage from './MainPage/MainPage'
-// import FolderPage from './FolderPage/FolderPage';
-// import NotePage from './NotePage/NotePage';
 import NotefulContext from './NotefulContext';
 import FolderSidebar from './FolderSidebar/FolderSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteContent from './NoteContent/NoteContent';
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote'
 
 class App extends Component {
   constructor(props) {
@@ -18,13 +17,25 @@ class App extends Component {
       notes: [],
     }
   }
+  addFolder = data => {
+    const newFolders = [...this.state.folders, data];
+    this.setState({
+      folders: newFolders
+    });
+  }
+  addNote = data => {
+    const newNotes = [...this.state.notes, data];
+    this.setState({
+      notes: newNotes
+    });
+  }
   deleteNote = noteId => {
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId
-    )
+    );
     this.setState({
       notes: newNotes
-    })
+    });
     console.log(this.state.notes)
   }
   componentDidMount() {
@@ -33,13 +44,13 @@ class App extends Component {
         if(!response.ok) {
           return response.json().then(error => {
             throw error
-          })
+          });
         } return response.json()
       })
       .then(data => {
         this.setState({
           folders: data
-        })
+        });
       })
       .catch(error =>{
         console.log(error)
@@ -50,23 +61,25 @@ class App extends Component {
         if(!response.ok) {
           return response.json().then(error => {
             throw error
-          })
+          });
         } return response.json()
       })
       .then(data => {
         this.setState({
           notes: data
-        })
+        });
       })
       .catch(error =>{
         console.log(error)
-      })
+      });
   }
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
+      addFolder: this.addFolder,
+      addNote: this.addNote,
     }
     return (
       <div className='App'>
@@ -79,24 +92,19 @@ class App extends Component {
               <Route exact path='/' component={FolderSidebar} />
               <Route path='/folder/:folderId' component={FolderSidebar} />
               <Route path='/note/:noteId' component={NoteSidebar} />
+              <Route path='/add-folder' component={FolderSidebar} />
+              <Route path='/add-note' component={FolderSidebar} />
             </aside>
             <section>
               <Route exact path='/' component={NoteList} />
               <Route path='/folder/:folderId' component={NoteList} />
               <Route path='/note/:noteId' component={NoteList} />
               <Route path='/note/:noteId' component={NoteContent} />
+              <Route path='/add-folder' component={AddFolder} />
+              <Route path='/add-note' component={AddNote} />
             </section>
-
-            {/* <Route path='/note/:noteId' render={(routerProps) =>
-              <NotePage
-                noteId={routerProps.match.params.noteId} 
-                onClickBack={() => routerProps.history.goBack()}
-                onDelete={() => routerProps.history.push('/')}
-              />}
-            /> */}
           </NotefulContext.Provider>
         </main>
-          
       </div>
     );
   }
