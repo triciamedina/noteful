@@ -23,3 +23,8 @@
     width: 150px;
     cursor: pointer;
 }
+
+.deleteNoteError {
+    color: darkorchid;
+    font-size: 12px;
+}

@@ -15,9 +15,8 @@ main {
 
 aside {
   flex: 1;
-  padding: 0px 0px;
+  padding: 20px;
   margin: 0px;
-
 }
 
 section {
@@ -76,4 +75,9 @@ section {
   border: 1px solid black;
   width: 200px;
   cursor: pointer;
+}
+
+.Error {
+    color: red;
+    font-size: 18px;
 }
