@@ -11,7 +11,7 @@ class NoteSidebar extends Component {
         return (
             <div className="Sidebar__folderdetail">
                 <button className="btn__back" onClick={() => this.props.history.goBack()}>Go back</button>
-                <h3 className="folderdetail">{folder[0].name}</h3>
+                <h2 className="folderdetail">{folder[0].name}</h2>
             </div>
         )
     }

@@ -107,9 +107,14 @@ class AddNote extends Component {
                 <h2 className='form__title'>Add a New Note</h2>
                 <div className='form__group'>
                     <label htmlFor='name'>Name</label>
-                    <input type='text' className='name-input' 
-                        name='name' id='name' 
+                    <input 
+                        type='text' 
+                        className='name-input' 
+                        name='name' 
+                        id='name' 
                         defaultValue='My New Note'
+                        aria-label='Note name'
+                        aria-required='true'
                         onChange={e => this.updateNoteName(e.target.value)}
                         />
                     {this.state.noteName.touched 
@@ -117,9 +122,13 @@ class AddNote extends Component {
                 </div>
                 <div className='form__group'>
                     <label htmlFor='content'>Note</label>
-                    <textarea className='content-input' 
-                        name='content' id='content' 
+                    <textarea 
+                        className='content-input' 
+                        name='content' 
+                        id='content' 
                         defaultValue='My New Note'
+                        aria-label='Note content'
+                        aria-required='true'
                         onChange={e => this.updateNoteContent(e.target.value)}
                     />
                     {this.state.noteContent.touched 
@@ -131,6 +140,7 @@ class AddNote extends Component {
                         className='folder-input' 
                         id='folder' 
                         name='folder'
+                        aria-label='Folder to add new note'
                         onChange={e => this.updateFolderId(e.target.value)}
                     >
                         <option key={0} value=''>Select</option>
@@ -140,7 +150,10 @@ class AddNote extends Component {
                     && (<ValidationError message={this.validateFolderId()} />) }
                 </div>
                 <div className='AddNote__buttons'>
-                    <button type='button' onClick={() => this.props.history.goBack()}>
+                    <button 
+                        type='button'
+                        onClick={() => this.props.history.goBack()}
+                    >
                         Cancel
                     </button>
                     <button 

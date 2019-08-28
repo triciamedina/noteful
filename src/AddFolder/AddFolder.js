@@ -69,6 +69,8 @@ class AddFolder extends Component {
                     <input type='text' className='name-input' 
                         name='name' id='name' 
                         defaultValue='My New Folder'
+                        aria-label='Folder name'
+                        aria-required='true'
                         onChange={e => this.updateFolderName(e.target.value)}
                     />
                     {this.state.folderName.touched && 

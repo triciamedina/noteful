@@ -32,12 +32,12 @@ class NoteList extends Component {
             <div className="NoteList__container">
                 <ul className="NoteList">
                     {(folderNotes || singleNote) || allNotes}
-                    {!notePath && 
+                </ul>
+                {!notePath && 
                         <Link to={'/add-note'} className='link__addnote'>
                             <button className="btn__addnote">Add note</button>
                         </Link>
                     }
-                </ul>
             </div>
         )
     }

@@ -102,7 +102,7 @@ class App extends Component {
         </header>
         <main>
           <NotefulContext.Provider value={contextValue}>
-            <aside>
+            <section className='Sidebar'>
             {folderError}
               <SidebarError>
                 <Route exact path='/' component={FolderSidebar} />
@@ -111,8 +111,8 @@ class App extends Component {
                 <Route path='/add-folder' component={FolderSidebar} />
                 <Route path='/add-note' component={FolderSidebar} />
               </SidebarError>
-            </aside>
-            <section>
+            </section>
+            <section className='MainContent'>
               {noteError}
               <NoteError>
                 <Route exact path='/' component={NoteList} />
