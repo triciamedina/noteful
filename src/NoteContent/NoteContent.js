@@ -4,8 +4,9 @@ import NotefulContext from '../NotefulContext';
 
 class NoteContent extends Component {
     static contextType = NotefulContext;
+    
     render() {
-        const note = this.context.notes.filter(note => note.id === this.props.match.params.noteId)
+        const note = this.context.notes.filter(note => note.id === parseInt(this.props.match.params.note_id))
         return (
             <div>
                 <p className="Note__content">{note[0].content}</p>

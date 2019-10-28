@@ -16,7 +16,7 @@ class Folder extends Component {
 
 Folder.propTypes = {
     folder: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
     })
 }

@@ -11,20 +11,20 @@ class NoteList extends Component {
     }
     render() {
         const {notes} = this.context;
-        const folderPath = this.props.match.params.folderId ? true : false;
-        const notePath = this.props.match.params.noteId ? true : false;
+        const folderPath = this.props.match.params.folder_id ? true : false;
+        const notePath = this.props.match.params.note_id ? true : false;
 
         const allNotes = notes.map(note => <Note key={note.id} note={note} />)
 
         const folderNotes = folderPath ? 
             notes
-                .filter(note => note.folderId === this.props.match.params.folderId)
+                .filter(note => note.folder_id === parseInt(this.props.match.params.folder_id))
                 .map(note => <Note key={note.id} note={note} />) 
                 : null;
 
         const singleNote = notePath ? 
             notes
-                .filter(note => note.id === this.props.match.params.noteId)
+                .filter(note => note.id === parseInt(this.props.match.params.note_id))
                 .map(note => <Note key={note.id} note={note} onDelete={this.onDelete}/>)
             : null;
 

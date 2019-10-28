@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './AddNote.css';
 import NotefulContext from '../NotefulContext';
 import ValidationError from '../ValidationError/ValidationError';
+import config from '../config';
 
 class AddNote extends Component {
     static contextType = NotefulContext;
@@ -69,10 +70,10 @@ class AddNote extends Component {
         const data = {
             'name': this.state.noteName.value,
             'modified': new Date(),
-            'folderId': this.state.folderId.value,
+            'folder_id': this.state.folderId.value,
             'content': this.state.noteContent.value,
         }
-        fetch('http://localhost:9090/notes', {
+        fetch(config.API_ENDPOINT + `/notes`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

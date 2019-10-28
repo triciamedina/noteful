@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './AddFolder.css';
 import ValidationError from '../ValidationError/ValidationError';
 import NotefulContext from '../NotefulContext';
+import config from '../config';
 
 class AddFolder extends Component {
     static contextType = NotefulContext;
@@ -32,7 +33,7 @@ class AddFolder extends Component {
         event.preventDefault();
         const folderName = this.state.folderName.value;
         const data = {'name': folderName}
-        fetch('http://localhost:9090/folders', {
+        fetch(config.API_ENDPOINT + `/folders`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

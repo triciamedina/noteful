@@ -12,6 +12,7 @@ import NoteError from './NoteError/NoteError';
 import SidebarError from './SidebarError/SidebarError';
 import NoteContentError from './NoteContentError/NoteContentError';
 import FormError from './FormError/FormError';
+import config from './config';
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class App extends Component {
     console.log(this.state.notes)
   }
   componentDidMount() {
-    fetch('http://localhost:9090/folders')
+    fetch(config.API_ENDPOINT + `/folders`)
       .then(response =>{
         if(!response.ok) {
           return response.json().then(error => {
@@ -62,7 +63,7 @@ class App extends Component {
         })
       })
   
-    fetch('http://localhost:9090/notes')
+    fetch(config.API_ENDPOINT + `/notes`)
       .then(response =>{
         if(!response.ok) {
           return response.json().then(error => {
@@ -106,8 +107,8 @@ class App extends Component {
             {folderError}
               <SidebarError>
                 <Route exact path='/' component={FolderSidebar} />
-                <Route path='/folder/:folderId' component={FolderSidebar} />
-                <Route path='/note/:noteId' component={NoteSidebar} />
+                <Route path='/folder/:folder_id' component={FolderSidebar} />
+                <Route path='/note/:note_id' component={NoteSidebar} />
                 <Route path='/add-folder' component={FolderSidebar} />
                 <Route path='/add-note' component={FolderSidebar} />
               </SidebarError>
@@ -116,11 +117,11 @@ class App extends Component {
               {noteError}
               <NoteError>
                 <Route exact path='/' component={NoteList} />
-                <Route path='/folder/:folderId' component={NoteList} />
-                <Route path='/note/:noteId' component={NoteList} />
+                <Route path='/folder/:folder_id' component={NoteList} />
+                <Route path='/note/:note_id' component={NoteList} />
               </NoteError>
               <NoteContentError>
-                <Route path='/note/:noteId' component={NoteContent} />
+                <Route path='/note/:note_id' component={NoteContent} />
               </NoteContentError>
               <FormError>
                 <Route path='/add-folder' component={AddFolder} />

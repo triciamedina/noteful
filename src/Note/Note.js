@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import './Note.css';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
+import config from '../config';
 
 class Note extends Component {
     constructor(props) {
@@ -15,8 +16,8 @@ class Note extends Component {
     }
     deleteNoteRequest = (e) => {
         e.preventDefault();
-        const noteId = this.props.note.id
-        fetch(`http://localhost:9090/notes/${noteId}`, {
+        const note_id = this.props.note.id
+        fetch(config.API_ENDPOINT + `/notes/${note_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -28,12 +29,9 @@ class Note extends Component {
                     throw error
                 })
             }
-            return response.json()
-        })
-        .then(data => {
             this.props.onDelete();
-            this.context.deleteNote(noteId);
-        })
+            this.context.deleteNote(note_id);
+        })  
         .catch(error => {
             this.setState({
                 error: error.message,
@@ -66,10 +64,10 @@ class Note extends Component {
 
 Note.propTypes = {
     note: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         modified: PropTypes.string.isRequired,
-        folderId: PropTypes.string.isRequired,
+        folder_id: PropTypes.number.isRequired,
         content: PropTypes.string.isRequired,
     }),
     onDelete: PropTypes.func,
