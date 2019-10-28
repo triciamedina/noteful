@@ -41,7 +41,6 @@ class App extends Component {
     this.setState({
       notes: newNotes
     });
-    console.log(this.state.notes)
   }
   componentDidMount() {
     fetch(config.API_ENDPOINT + `/folders`)
